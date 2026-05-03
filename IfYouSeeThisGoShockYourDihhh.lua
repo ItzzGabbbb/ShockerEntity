@@ -48,17 +48,14 @@ local function spawnShocker()
 
                 oogaBoogaaPart.CanCollide = false
                 oogaBoogaaPart.Anchored = false
-
                 task.wait(3)
                 shockerModel:Destroy()
 
-                -- death stuff
                 game:GetService("ReplicatedStorage").GameStats["Player_".. player.Name].Total.DeathCause.Value = "Shocker"
                 firesignal(game.ReplicatedStorage.RemotesFolder.DeathHint.OnClientEvent,
-                    {"You died to who you call Shocker...","Dont look at it or it stuns you!"},
+                    {"You died to who you call Shocker...", "Don't look at it or it stuns you!"},
                     "Blue"
                 )
-
                 break
             end
         else
@@ -70,22 +67,23 @@ local function spawnShocker()
 
     oogaBoogaaPart.CanCollide = false
     oogaBoogaaPart.Anchored = false
-
     task.wait(3)
     shockerModel:Destroy()
 
-    ---====== ONE-TIME ACHIEVEMENT ======---
+    -- ✅ ONE-TIME ACHIEVEMENT
     if not getgenv().ShockerEncountered then
-        getgenv().ShockerEncountered = true
+        if humanoid.Health > 0 then
+            getgenv().ShockerEncountered = true
 
-        local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+            local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
-        achievementGiver({
-            Title = "Shocking Experience",
-            Desc = "Look at me.",
-            Reason = "Encounter Shocker.",
-            Image = "rbxassetid://17857830685"
-        })
+            achievementGiver({
+                Title = "Shocking Experience",
+                Desc = "Look at me.",
+                Reason = "Encounter Shocker.",
+                Image = "rbxassetid://17857830685"
+            })
+        end
     end
 end
 
